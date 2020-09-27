@@ -18,7 +18,7 @@ Results
 
 ## Application Process
 
-first user lands on start page once click the start button then modal will appear with the first question, once select the answer. Then will proceed through the rest of the questions. At the end of the 10th question then show the score and will proceed to the results page
+first user lands on start page once click the start button then user will be navigated to the quiz screen, once select the answer. Then will proceed through the rest of the questions. At the end of the 10th question then show the score and will proceed to the results page
 
 ## Thoughts and Ideas
 
@@ -28,4 +28,5 @@ first user lands on start page once click the start button then modal will appea
 - close, save and
 - timer
 - Selecting answers long hold for mobile, double click for web?
--
+- Add page transitions off of pages
+- Save where the user left off at
