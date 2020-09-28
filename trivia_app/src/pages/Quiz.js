@@ -20,7 +20,6 @@ export default function Quiz() {
     //https://www.bitnative.com/2020/07/06/four-ways-to-fetch-data-in-react/
     // Get this out of render, custom hook or something react-query
 
-    // what kind of checks are needed??
     const API =
       "https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean";
 
@@ -132,27 +131,19 @@ export default function Quiz() {
         .catch((err) => console.log(err));
     }
   }, []);
-
-  // Only view the one question
+  useEffect(() => {
+    // set the first question
+    setCurrentQuestion(trivialQuestions[questionToAnswer]);
+  }, [trivialQuestions, questionToAnswer]);
 
   function progressQuestion() {
-    // const CurrentQuestionEvaluated = trivialQuestions.filter(
-    //   (question, index) => index === questionToAnswer
-    // );
-    const CurrentQuestionEvaluated = trivialQuestions[questionToAnswer];
-    //Step through test question , but not past the question length
     const questionLength = trivialQuestions.length;
     if (questionToAnswer < questionLength) {
       nextQuestionToAnswer(questionToAnswer + 1);
     } else {
       nextQuestionToAnswer(0);
     }
-    setCurrentQuestion(CurrentQuestionEvaluated);
   }
-  useEffect(() => {
-    console.log(trivialQuestions);
-    console.log(questionAnswer);
-  });
 
   return (
     <div>
@@ -165,8 +156,6 @@ export default function Quiz() {
           />
         ) : null}
       </div>
-
-      <button onClick={() => progressQuestion()}>NEXT</button>
     </div>
   );
 }
