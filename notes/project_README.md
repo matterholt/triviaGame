@@ -30,3 +30,9 @@ first user lands on start page once click the start button then user will be nav
 - Selecting answers long hold for mobile, double click for web?
 - Add page transitions off of pages
 - Save where the user left off at
+- T , F for key controls, enter
+
+## TODO
+
+- [ ] fetch from the api when click "start" on the the home page
+- [ ] create custom hooks
