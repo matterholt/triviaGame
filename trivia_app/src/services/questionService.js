@@ -11,19 +11,19 @@ const useFetchQuestionsAPI = () => {
   // const API = `${process.env.TRIVIA_QUESTIONS}?amount=${amountQuestions}&difficulty=${difficultyLevel}&type=${typeQuestions}`;
 
   useEffect(() => {
-    // seQuestionList(test_questions.results);
-    setLoading(true);
-    const fetchAPI = async () => {
-      try {
-        const response = await fetch(url);
-        const json = await response.json();
-        seQuestionList(json.results);
-      } catch (error) {
-        setError(true);
-      }
-      setLoading(false);
-    };
-    fetchAPI();
+    seQuestionList(test_questions.results);
+    // setLoading(true);
+    // const fetchAPI = async () => {
+    //   try {
+    //     const response = await fetch(url);
+    //     const json = await response.json();
+    //     seQuestionList(json.results);
+    //   } catch (error) {
+    //     setError(true);
+    //   }
+    //   setLoading(false);
+    // };
+    // fetchAPI();
   }, [url]);
 
   return [{ questionList, error, loading }, setURL];
