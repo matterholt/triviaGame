@@ -5,7 +5,6 @@ const CardQuestion = ({
   questionWasAnswered,
   quizQuestion,
   progressQuestion,
-  ...props
 }) => {
   const { category, question, correct_answer } = quizQuestion;
 
