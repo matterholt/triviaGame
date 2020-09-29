@@ -1,12 +1,16 @@
 # triviaGame_g2i
 
-There are 3 components that are depicted in the wire-frame.
+There are 3 pages that are depicted in the wire-frame.
 
 Start / Intro
 
 Question page
 
 Results
+
+## questions
+
+- from the API the text has characters that are unreadable
 
 ## User Stories
 
@@ -18,9 +22,7 @@ Results
 
 ## Application Process
 
-first user lands on start page once click the start button then user will be navigated to the quiz screen, once select the answer. Then will proceed through the rest of the questions. At the end of the 10th question then show the score and will proceed to the results page
-
-## Thoughts and Ideas
+First user lands on start page once click the start button then user will be navigated to the quiz screen, once select the answer. Then will proceed through the rest of the questions. At the end of the 10th question then show the score and will proceed to the results page
 
 ## extra features
 
@@ -31,8 +33,3 @@ first user lands on start page once click the start button then user will be nav
 - Add page transitions off of pages
 - Save where the user left off at
 - T , F for key controls, enter
-
-## TODO
-
-- [ ] fetch from the api when click "start" on the the home page
-- [ ] create custom hooks
