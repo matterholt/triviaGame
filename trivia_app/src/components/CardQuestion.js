@@ -1,4 +1,17 @@
 import React from "react";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
+
+import ButtonContainer from "./ButtonContainer";
+
+const style = css`
+  display: flex;
+  flex-flow: column;
+  width: 25%;
+  margin: 15px;
+  font-size: 2rem;
+`;
+const questionContainer = css``;
 
 const CardQuestion = ({
   qId,
@@ -23,18 +36,13 @@ const CardQuestion = ({
       });
       progressQuestion();
     }
-  }
+  } // custom hook useReducer
 
   return (
-    <div key={qId}>
+    <div key={qId} css={style}>
       <h2>{category}</h2>
-      <div className="questionContainer">{question}</div>
-      <button value="True" onClick={checkCorrectAnswer}>
-        True
-      </button>
-      <button value="False" onClick={checkCorrectAnswer}>
-        False
-      </button>
+      <div css={questionContainer}>{question}</div>
+      <ButtonContainer checkCorrectAnswer={checkCorrectAnswer} />
     </div>
   );
 };
