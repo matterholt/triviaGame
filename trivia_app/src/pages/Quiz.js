@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import CardQuestion from "../components/CardQuestion";
 
 import { Redirect } from "react-router-dom";
@@ -50,9 +52,17 @@ export default function Quiz() {
   if (didCompleteQuestions) {
     return <Redirect to="/QuizResults" />;
   }
+
+  const style = css`
+    display: grid;
+    place-items: center;
+    width: 100vw;
+    height: 100vh;
+  `;
+
   if (currentQuestion) {
     return (
-      <div>
+      <div css={style}>
         {`Question ${questionToAnswer + 1} of ${questionList.length}`}
         <CardQuestion
           questionWasAnswered={questionWasAnswered}

@@ -5,7 +5,7 @@ import ButtonBool from "./ButtonBool";
 const ButtonContainer = ({ checkCorrectAnswer }) => {
   const buttonContainer = css`
     width: 100%;
-    margin: 15px 0;
+    margin: 25px 0;
     display: flex;
     justify-content: space-between;
   `;

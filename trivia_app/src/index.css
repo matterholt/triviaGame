@@ -1,3 +1,9 @@
+:root {
+  --main-Color-dark: #152b3c;
+  --main-Color-light: #d6d6d7;
+
+}
+
 html {
   font-size: 62.8%;
 }
