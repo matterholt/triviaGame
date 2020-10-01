@@ -1,11 +1,12 @@
 :root {
   --main-Color-dark: #152b3c;
-  --main-Color-light: #d6d6d7;
-
+  --main-Background: #E9E9E9;
+  --main-Color-light: #3299BB;
 }
 
 html {
   font-size: 62.8%;
+  background-color: var(--main-Background)
 }
 
 body {
