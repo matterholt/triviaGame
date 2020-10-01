@@ -8,17 +8,16 @@ const style = css`
   display: flex;
   flex-flow: column;
   width: 35%;
-
   font-size: 2rem;
+  color: var(--main-Color-dark);
+  background-color: var(--main-Color-light);
+  padding: 15px;
+  border-radius: 10px;
+  line-height: 30px;
 `;
 const container = css`
   display: grid;
   place-items: center;
-  background-color: var(--main-Color-dark);
-  color: var(--main-Color-light);
-  padding: 15px;
-  border-radius: 10px;
-  line-height: 30px;
 `;
 const title = css`
   background-color: var(--main-background);
@@ -26,8 +25,10 @@ const title = css`
   color: var(--main-Color-dark);
 `;
 
+// think will break this up and add all to the quiz component??
 const CardQuestion = ({
-  qId,
+  questionId,
+  questionLength,
   questionWasAnswered,
   quizQuestion,
   progressQuestion,
@@ -52,9 +53,11 @@ const CardQuestion = ({
   } // custom hook useReducer
 
   return (
-    <div key={qId} css={style}>
+    <div key={questionId} css={style}>
       <h2 css={[container, title]}>{category}</h2>
       <div css={container}>{question}</div>
+      {`Question ${questionId} of ${questionLength}`}
+
       <ButtonContainer checkCorrectAnswer={checkCorrectAnswer} />
     </div>
   );
