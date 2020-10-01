@@ -39,9 +39,6 @@ export default function QuizResults() {
       <Link onClick={resetQuestions} to="/Quiz">
         Play Again
       </Link>
-      <Link onClick={resetQuestions} to="/">
-        Home
-      </Link>
     </div>
   );
 }

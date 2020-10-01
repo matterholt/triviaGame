@@ -4,7 +4,7 @@ import { jsx, css } from "@emotion/core";
 
 const ButtonBool = ({ children, ...props }) => {
   const boolButton = css`
-    background-color: var(--main-Color-light);
+    background-color: var(--main-Background);
     border: 2px solid var(--main-Color-dark);
     border-radius: 8px;
     padding: 5px;
