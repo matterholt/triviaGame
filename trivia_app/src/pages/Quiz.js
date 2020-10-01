@@ -63,8 +63,9 @@ export default function Quiz() {
   if (currentQuestion) {
     return (
       <div css={style}>
-        {`Question ${questionToAnswer + 1} of ${questionList.length}`}
         <CardQuestion
+          questionLength={questionList.length}
+          questionId={questionToAnswer + 1}
           questionWasAnswered={questionWasAnswered}
           quizQuestion={currentQuestion}
           progressQuestion={progressQuestion}
