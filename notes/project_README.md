@@ -31,6 +31,7 @@ First user lands on start page once click the start button then user will be nav
 
 ## extra features future
 
+- if user does not answer the 10 question the should all be wrong.
 - backwards on questions, would have to retrain the value selected?
 - instead of click then move to the next question have a "check box" the click next
 - change in difficulty (hard : 10 question, easy: 8 questions) or somethings

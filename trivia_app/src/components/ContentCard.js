@@ -14,7 +14,8 @@ const contentCard = css`
   margin: 5px;
   border-radius: 10px;
   background-color: white;
-  min-width: 250px;
+  ${"" /* min-width: 250px; */}
+  width: 80vw;
 `;
 
 export default function ContentCard({ children }) {
