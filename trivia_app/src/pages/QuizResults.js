@@ -65,7 +65,7 @@ export default function QuizResults() {
               return <ResultRundown userSubmittal={userSubmittal} />;
             })}
           </ul>
-          <LinkButton pathAction={resetQuestions} pathName="Home" />
+          <LinkButton pathAction={resetQuestions} pathName="Play Again?" />
         </ContentCard>
       </Layout>
     );

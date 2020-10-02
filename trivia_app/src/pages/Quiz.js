@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { jsx, css } from "@emotion/core";
 import CardQuestion from "../components/CardQuestion";
 
+import Error from "../components/Error";
 import Loading from "../components/Loading";
 import Layout from "../components/Layout";
 
@@ -49,7 +50,7 @@ export default function Quiz() {
     return <Loading />;
   }
   if (error) {
-    return <h1>ERROr..</h1>;
+    return <Error link={{ name: "Try Again", location: "/" }} />;
   }
   if (didCompleteQuestions) {
     return <Redirect to="/QuizResults" />;

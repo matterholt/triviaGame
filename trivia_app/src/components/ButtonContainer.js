@@ -6,7 +6,7 @@ const buttonContainer = css`
   width: 100%;
   margin: 25px 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 `;
 const ButtonContainer = ({ checkCorrectAnswer }) => {
   return (
