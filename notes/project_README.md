@@ -1,4 +1,4 @@
-# triviaGame_g2i
+# triviaGame
 
 There are 3 pages that are depicted in the wire-frame.
 
