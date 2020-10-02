@@ -17,7 +17,6 @@ function QuestionProvider({ children }) {
     </TriviaQuestionsContext.Provider>
   );
 }
-
 function useTriviaQuestions() {
   // keep the provider in the context folder allowing central location
   const context = React.useContext(TriviaQuestionsContext);

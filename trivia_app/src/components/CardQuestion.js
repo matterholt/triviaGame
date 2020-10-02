@@ -1,32 +1,27 @@
 import React from "react";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-
 import ButtonContainer from "./ButtonContainer";
+import ContentCard from "./ContentCard";
 
-const style = css`
-  display: flex;
-  flex-flow: column;
-  width: 35%;
-  height: 60vh;
-  font-size: 2rem;
-  color: var(--main-Color-dark);
-  border: solid 5px var(--main-Color-light);
-  padding: 15px;
-  border-radius: 10px;
-  line-height: 30px;
-  background-color: white;
-`;
-const container = css`
-  display: grid;
-  height: 150px;
-`;
 const title = css`
   background-color: var(--main-background);
   margin: 20px 0;
   color: var(--main-Color-dark);
 `;
+const questionContainer = css`
+  max-width: 550px;
+  height: 150px;
+  margin: 25px 0;
+`;
 
+const questionCount = css`
+  align-self: flex-start;
+  font-size: 1.2rem;
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+`;
 // think will break this up and add all to the quiz component??
 const CardQuestion = ({
   questionId,
@@ -40,57 +35,36 @@ const CardQuestion = ({
   function checkCorrectAnswer(e) {
     const userAnswer = e.target.value;
     if (userAnswer === correct_answer) {
+      // check if the answer is not in incorrect_answers
       questionWasAnswered({
         question: [question],
-        userAnswer: "correct",
+        userAnswer,
+        correct_answer,
+        isCorrectAnswer: true,
       });
       progressQuestion();
     } else {
       questionWasAnswered({
         question: [question],
-        userAnswer: "wrong",
+        correct_answer,
+        isCorrectAnswer: false,
+        userAnswer,
       });
       progressQuestion();
     }
   } // custom hook useReducer
 
   return (
-    <div key={questionId} css={style}>
-      <p>Question: {questionId}</p>
-      <h2 css={[container, title]}>{category}</h2>
-      <div css={container}>{question}</div>
+    <ContentCard key={questionId}>
+      <p css={questionCount}>
+        Question: {questionId}/{questionLength}
+      </p>
+      <h2 css={title}>{category}</h2>
+      <div css={questionContainer}>{question}</div>
 
       <ButtonContainer checkCorrectAnswer={checkCorrectAnswer} />
-      {/* {`Question ${questionId} of ${questionLength}`} */}
-      <div
-        style={{
-          display: "flex",
-          width: "100%",
-          justifyContent: "space-around",
-          marginTop: "25px",
-        }}
-      >
-        <CircleSVG />
-        <CircleSVG />
-        <CircleSVG />
-        <CircleSVG />
-        <CircleSVG />
-        <CircleSVG />
-        <CircleSVG />
-        <CircleSVG />
-      </div>
-    </div>
+    </ContentCard>
   );
 };
 
 export default CardQuestion;
-
-const tempCircle = css`
-  border-radius: 100%;
-  height: 20px;
-  width: 20px;
-  border: solid 2px var(--main-Color-light);
-`;
-const CircleSVG = () => {
-  return <div css={tempCircle}></div>;
-};

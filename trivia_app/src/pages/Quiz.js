@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { jsx, css } from "@emotion/core";
 import CardQuestion from "../components/CardQuestion";
 
+import Layout from "../components/Layout";
+
 import { Redirect } from "react-router-dom";
 import {
   useTriviaQuestions,
@@ -13,11 +15,9 @@ import { useFetchQuestionsAPI } from "../services/questionService";
 
 export default function Quiz() {
   const { triviaQuestions } = useTriviaQuestions(); // might not need this context
-
-  const [{ questionList, error, loading }, setURL] = useFetchQuestionsAPI();
+  const [{ questionList, error, loading }, setURL] = useFetchQuestionsAPI(); // move the fetch in to the context??
 
   const { userAnswers, addUserAnswers } = useAnsweredQuestions();
-
   // controls the current question that would need to be answered move to hook!
   const [currentQuestion, setCurrentQuestion] = useState();
   const [questionToAnswer, nextQuestionToAnswer] = useState(0);
@@ -52,17 +52,9 @@ export default function Quiz() {
   if (didCompleteQuestions) {
     return <Redirect to="/QuizResults" />;
   }
-
-  const style = css`
-    display: grid;
-    place-items: center;
-    width: 100vw;
-    height: 100vh;
-  `;
-
   if (currentQuestion) {
     return (
-      <div css={style}>
+      <Layout>
         <CardQuestion
           questionLength={questionList.length}
           questionId={questionToAnswer + 1}
@@ -70,7 +62,7 @@ export default function Quiz() {
           quizQuestion={currentQuestion}
           progressQuestion={progressQuestion}
         />
-      </div>
+      </Layout>
     );
   } else {
     return <h1>No TEST</h1>;

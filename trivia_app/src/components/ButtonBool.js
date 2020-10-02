@@ -11,10 +11,11 @@ const ButtonBool = ({ children, ...props }) => {
     width: 40%;
     font-size: 2rem;
     scale: 1;
-    transition: scale 200ms ease-in-out;
+    transition: scale 100ms ease-in-out;
 
     &:hover {
-      scale: 1.1;
+      scale: 1.05;
+      cursor: pointer;
     }
   `;
   return (
