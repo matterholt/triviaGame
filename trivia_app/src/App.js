@@ -9,6 +9,7 @@ import { QuestionProvider } from "./context/questionContext";
 
 // create routing file for all routes, (might be easier to manage??)
 
+// if user goes back how to handle the history, or should
 function App() {
   return (
     <QuestionProvider>
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/QuizResults">
             <QuizResults />
           </Route>
+          <Route path="/" render={() => <div>404</div>} /> /
         </Switch>
       </Router>
     </QuestionProvider>

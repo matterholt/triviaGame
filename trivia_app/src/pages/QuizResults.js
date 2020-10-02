@@ -6,6 +6,7 @@ import {
   useAnsweredQuestions,
   useTriviaQuestions,
 } from "../context/questionContext";
+
 import { Redirect } from "react-router-dom";
 
 import Layout from "../components/Layout";
@@ -24,6 +25,7 @@ export default function QuizResults() {
   const { userAnswers, addUserAnswers } = useAnsweredQuestions();
 
   const [totalCorrect, setTotalCorrect] = useState();
+  let history = useHistory();
 
   function resetQuestions() {
     setTriviaQuestions([]);
@@ -55,6 +57,7 @@ export default function QuizResults() {
             return <ResultRundown userSubmittal={userSubmittal} />;
           })}
         </ul>
+        <button onClick={resetQuestions}>TEST</button>
         <LinkButton
           onClick={resetQuestions}
           link={{ name: "Play Again", location: "/" }}
