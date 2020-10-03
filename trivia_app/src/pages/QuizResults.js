@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import emoji from "react-easy-emoji";
+import { useHistory } from "react-router-dom";
+
 import {
   useAnsweredQuestions,
   useTriviaQuestions,
 } from "../context/questionContext";
-import { Redirect } from "react-router-dom";
 
 import Layout from "../components/Layout";
-import LinkButton from "../components/LinkButton";
+import HomeButton from "../components/HomeButton";
 import ContentCard from "../components/ContentCard";
 
-const resultsList = css`
+import ResultRundown from "../components/ResultRundown";
+
+const resultsListContainer = css`
   list-style: none;
   font-weight: 500;
   margin: 0;
@@ -22,13 +25,15 @@ const resultsList = css`
 export default function QuizResults() {
   const { setTriviaQuestions } = useTriviaQuestions();
   const { userAnswers, addUserAnswers } = useAnsweredQuestions();
-
   const [totalCorrect, setTotalCorrect] = useState();
+
+  const history = useHistory();
 
   function resetQuestions() {
     setTriviaQuestions([]);
     addUserAnswers([]);
     setTotalCorrect();
+    history.push("/");
   }
 
   useEffect(() => {
@@ -39,73 +44,31 @@ export default function QuizResults() {
   }, [userAnswers, totalCorrect]);
 
   if (userAnswers.length === 0) {
-    return <Redirect to="/" />;
+    return (
+      <Layout>
+        <ContentCard>
+          <h2>Did not complete test</h2>
+          <HomeButton pathAction={resetQuestions} pathName="Home" />
+        </ContentCard>
+      </Layout>
+    );
+  } else {
+    return (
+      <Layout>
+        <ContentCard>
+          <h2>Results of test</h2>
+          <p>
+            YOU SCORED {totalCorrect} / {userAnswers.length}
+          </p>
+
+          <ul css={resultsListContainer}>
+            {userAnswers.map((userSubmittal) => {
+              return <ResultRundown userSubmittal={userSubmittal} />;
+            })}
+          </ul>
+          <HomeButton pathAction={resetQuestions} pathName="Play Again?" />
+        </ContentCard>
+      </Layout>
+    );
   }
-
-  return (
-    <Layout>
-      <ContentCard>
-        <h2>Results of test</h2>
-        <p>
-          YOU SCORED {totalCorrect} / {userAnswers.length}
-        </p>
-
-        <ul css={resultsList}>
-          {userAnswers.map((userSubmittal) => {
-            return <ResultRundown userSubmittal={userSubmittal} />;
-          })}
-        </ul>
-        <LinkButton
-          onClick={resetQuestions}
-          link={{ name: "Play Again", location: "/" }}
-        />
-      </ContentCard>
-    </Layout>
-  );
 }
-
-const listItem = css`
-  display: flex;
-  flex-flow: column;
-  margin: 30px 0;
-`;
-const ResultRundown = ({ userSubmittal }) => {
-  const {
-    question,
-    isCorrectAnswer,
-    userAnswer,
-    correct_answer,
-  } = userSubmittal;
-  return (
-    <li css={listItem}>
-      <p style={{ margin: "0" }}>
-        <span style={{ marginRight: "5px" }}>
-          {isCorrectAnswer ? emoji("✅") : emoji("❌")}
-        </span>
-        {question}
-      </p>
-      <p
-        style={{
-          fontWeight: "250",
-          margin: "0 0 0 30px",
-          margin: "15px 0px 0px 30px",
-        }}
-      >
-        Your Answer :{" "}
-        <span
-          style={{
-            fontWeight: "900",
-            color: `${isCorrectAnswer ? "rgb(119, 178, 85)" : "#dd2e44"}`,
-          }}
-        >
-          {userAnswer}
-        </span>
-        {isCorrectAnswer ? null : (
-          <span style={{ marginLeft: "50px", fontWeight: "900" }}>
-            Correct Answer: {correct_answer}
-          </span>
-        )}
-      </p>
-    </li>
-  );
-};

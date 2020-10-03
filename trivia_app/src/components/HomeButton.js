@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import { Link } from "react-router-dom";
 
 const linkButton = css`
   font-size: 2.5rem;
@@ -9,7 +8,6 @@ const linkButton = css`
   text-transform: uppercase;
   border-radius: 5px;
   transition: scale 100ms ease-in-out;
-  width: 50%;
   text-align: center;
   margin: 20px;
   border: 2px solid var(--main-Color-dark);
@@ -22,12 +20,12 @@ const linkButton = css`
     cursor: pointer;
   }
 `;
-
-const LinkButton = ({ link }) => {
+// convert to switch with rout dir
+const HomeButton = ({ pathAction, pathName }) => {
   return (
-    <Link css={linkButton} to={link.location}>
-      {link.name}
-    </Link>
+    <button css={linkButton} onClick={pathAction}>
+      {pathName}
+    </button>
   );
 };
-export default LinkButton;
+export default HomeButton;

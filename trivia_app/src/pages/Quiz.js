@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-/** @jsx jsx */
-import { jsx, css } from "@emotion/core";
 import CardQuestion from "../components/CardQuestion";
 
+import Error from "../components/Error";
+import Loading from "../components/Loading";
 import Layout from "../components/Layout";
 
 import { Redirect } from "react-router-dom";
@@ -14,10 +14,11 @@ import {
 import { useFetchQuestionsAPI } from "../services/questionService";
 
 export default function Quiz() {
-  const { triviaQuestions } = useTriviaQuestions(); // might not need this context
-  const [{ questionList, error, loading }, setURL] = useFetchQuestionsAPI(); // move the fetch in to the context??
+  const { triviaQuestions } = useTriviaQuestions();
+  const [{ error, loading }] = useFetchQuestionsAPI();
 
   const { userAnswers, addUserAnswers } = useAnsweredQuestions();
+
   // controls the current question that would need to be answered move to hook!
   const [currentQuestion, setCurrentQuestion] = useState();
   const [questionToAnswer, nextQuestionToAnswer] = useState(0);
@@ -34,8 +35,8 @@ export default function Quiz() {
   }
 
   useEffect(() => {
-    setCurrentQuestion(questionList[questionToAnswer]);
-  }, [questionList, questionToAnswer]);
+    setCurrentQuestion(triviaQuestions[questionToAnswer]);
+  }, [triviaQuestions, questionToAnswer]);
 
   useEffect(() => {
     if (questionToAnswer >= 10) {
@@ -44,10 +45,10 @@ export default function Quiz() {
   }, [questionToAnswer]);
 
   if (loading) {
-    return <h1>Loading..</h1>;
+    return <Loading />;
   }
   if (error) {
-    return <h1>ERROr..</h1>;
+    return <Error link={{ name: "Try Again", location: "/" }} />;
   }
   if (didCompleteQuestions) {
     return <Redirect to="/QuizResults" />;
@@ -56,7 +57,7 @@ export default function Quiz() {
     return (
       <Layout>
         <CardQuestion
-          questionLength={questionList.length}
+          questionLength={triviaQuestions.length}
           questionId={questionToAnswer + 1}
           questionWasAnswered={questionWasAnswered}
           quizQuestion={currentQuestion}
@@ -65,6 +66,6 @@ export default function Quiz() {
       </Layout>
     );
   } else {
-    return <h1>No TEST</h1>;
+    return null;
   }
 }

@@ -1,6 +1,5 @@
 import React from "react";
-/** @jsx jsx */
-import { jsx, css } from "@emotion/core";
+
 import emoji from "react-easy-emoji";
 
 import Layout from "../components/Layout";
@@ -13,7 +12,6 @@ const Home = () => (
       <h1>Welcome to the Trivia Challenge</h1>
       <p>You will be precented with 10 True or False questions</p>
       <p>Can you score {emoji("💯")}</p>
-
       <LinkButton link={{ name: "Begin", location: "/Quiz" }} />
     </ContentCard>
   </Layout>
