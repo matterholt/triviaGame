@@ -4,11 +4,17 @@
 
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import { QuestionProvider } from "../context/questionContext";
+
 import userEvent from "@testing-library/user-event";
 
 import Quiz from "../pages/Quiz";
 
 test("Quiz Question Page", () => {
-  render(<Quiz />);
+  render(
+    <QuestionProvider>
+      <Quiz />
+    </QuestionProvider>
+  );
   screen.debug();
 });

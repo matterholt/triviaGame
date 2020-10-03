@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import { useHistory } from "react-router-dom";
@@ -9,7 +10,7 @@ import {
 } from "../context/questionContext";
 
 import Layout from "../components/Layout";
-import LinkButton from "../components/LinkButton-try";
+import HomeButton from "../components/HomeButton";
 import ContentCard from "../components/ContentCard";
 
 import ResultRundown from "../components/ResultRundown";
@@ -47,7 +48,7 @@ export default function QuizResults() {
       <Layout>
         <ContentCard>
           <h2>Did not complete test</h2>
-          <LinkButton pathAction={resetQuestions} pathName="Home" />
+          <HomeButton pathAction={resetQuestions} pathName="Home" />
         </ContentCard>
       </Layout>
     );
@@ -65,7 +66,7 @@ export default function QuizResults() {
               return <ResultRundown userSubmittal={userSubmittal} />;
             })}
           </ul>
-          <LinkButton pathAction={resetQuestions} pathName="Play Again?" />
+          <HomeButton pathAction={resetQuestions} pathName="Play Again?" />
         </ContentCard>
       </Layout>
     );

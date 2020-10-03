@@ -1,6 +1,5 @@
 import React from "react";
-/** @jsx jsx */
-import { jsx, css } from "@emotion/core";
+
 import emoji from "react-easy-emoji";
 
 import Layout from "../components/Layout";

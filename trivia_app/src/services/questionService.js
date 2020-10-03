@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { test_questions } from "./test_data";
 import { useTriviaQuestions } from "../context/questionContext";
 
 const useFetchQuestionsAPI = () => {
@@ -25,7 +24,7 @@ const useFetchQuestionsAPI = () => {
       setLoading(false);
     };
     fetchAPI();
-  }, [url]);
+  }, [url, setTriviaQuestions]);
 
   return [{ error, loading }, setURL];
 };

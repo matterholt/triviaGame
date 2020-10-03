@@ -1,7 +1,5 @@
-import React from "react";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import { Link } from "react-router-dom";
 
 const linkButton = css`
   font-size: 2.5rem;
@@ -23,11 +21,11 @@ const linkButton = css`
   }
 `;
 
-const LinkButton = ({ pathAction, pathName }) => {
+const HomeButton = ({ pathAction, pathName }) => {
   return (
     <button css={linkButton} onClick={pathAction}>
       {pathName}
     </button>
   );
 };
-export default LinkButton;
+export default HomeButton;

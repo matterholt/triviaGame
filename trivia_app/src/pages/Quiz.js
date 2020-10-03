@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-/** @jsx jsx */
-import { jsx, css } from "@emotion/core";
 import CardQuestion from "../components/CardQuestion";
 
 import Error from "../components/Error";

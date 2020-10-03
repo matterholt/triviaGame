@@ -1,6 +1,4 @@
 import React from "react";
-/** @jsx jsx */
-import { jsx, css } from "@emotion/core";
 
 import Layout from "./Layout";
 import ContentCard from "./ContentCard";

@@ -1,4 +1,3 @@
-import React from "react";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import emoji from "react-easy-emoji";
@@ -30,7 +29,6 @@ const ResultRundown = ({ userSubmittal }) => {
       <p
         style={{
           fontWeight: "250",
-          margin: "0 0 0 30px",
           margin: "15px 0px 0px 30px",
         }}
       >
