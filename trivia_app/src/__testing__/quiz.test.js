@@ -6,11 +6,14 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { QuestionProvider } from "../context/questionContext";
 
-import userEvent from "@testing-library/user-event";
+import {
+  useTriviaQuestions,
+  useAnsweredQuestions,
+} from "../context/questionContext";
 
 import Quiz from "../pages/Quiz";
 
-test("Quiz Question Page", () => {
+test("Question Consumer default", () => {
   render(
     <QuestionProvider>
       <Quiz />
