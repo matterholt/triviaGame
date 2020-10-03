@@ -20,7 +20,7 @@ const linkButton = css`
     cursor: pointer;
   }
 `;
-
+// convert to switch with rout dir
 const HomeButton = ({ pathAction, pathName }) => {
   return (
     <button css={linkButton} onClick={pathAction}>
