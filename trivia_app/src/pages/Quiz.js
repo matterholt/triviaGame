@@ -12,16 +12,16 @@ import {
 } from "../context/questionContext";
 
 import { useFetchQuestionsAPI } from "../services/questionService";
+import { useProgressQuestion } from "../hooks/useProgressQuestion";
 
 export default function Quiz() {
   const { triviaQuestions } = useTriviaQuestions();
   const [{ error, loading }] = useFetchQuestionsAPI();
-
   const { userAnswers, addUserAnswers } = useAnsweredQuestions();
+  const { progressNextQuestion, questionIndexToAnswer } = useProgressQuestion();
 
   // controls the current question that would need to be answered move to hook!
   const [currentQuestion, setCurrentQuestion] = useState();
-  const [questionToAnswer, nextQuestionToAnswer] = useState(0);
 
   // controls user access to the questions
   const [didCompleteQuestions, setDidCompleteQuestions] = useState(false);
@@ -30,19 +30,20 @@ export default function Quiz() {
     // added user results to the completed question answered
     addUserAnswers([...userAnswers, userAnswered]);
   }
-  function progressQuestion() {
-    nextQuestionToAnswer(questionToAnswer + 1);
-  }
 
   useEffect(() => {
-    setCurrentQuestion(triviaQuestions[questionToAnswer]);
-  }, [triviaQuestions, questionToAnswer]);
+    setCurrentQuestion(triviaQuestions[questionIndexToAnswer]);
+  }, [triviaQuestions, questionIndexToAnswer]);
 
   useEffect(() => {
-    if (questionToAnswer >= 10) {
+    // checks for question length so when user complete will switch the quiz to complete
+    if (
+      questionIndexToAnswer >= triviaQuestions.length &&
+      triviaQuestions.length !== 0
+    ) {
       setDidCompleteQuestions(true);
     }
-  }, [questionToAnswer]);
+  }, [questionIndexToAnswer, triviaQuestions]);
 
   if (loading) {
     return <Loading />;
@@ -58,10 +59,10 @@ export default function Quiz() {
       <Layout>
         <CardQuestion
           questionLength={triviaQuestions.length}
-          questionId={questionToAnswer + 1}
+          questionId={questionIndexToAnswer + 1}
           questionWasAnswered={questionWasAnswered}
           quizQuestion={currentQuestion}
-          progressQuestion={progressQuestion}
+          progressNextQuestion={progressNextQuestion}
         />
       </Layout>
     );

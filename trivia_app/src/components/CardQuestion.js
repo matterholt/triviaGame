@@ -13,7 +13,6 @@ const questionContainer = css`
   height: 150px;
   margin: 25px 0;
 `;
-
 const questionCount = css`
   align-self: flex-start;
   font-size: 1.2rem;
@@ -22,18 +21,27 @@ const questionCount = css`
   font-weight: 500;
 `;
 // think will break this up and add all to the quiz component??
+
 const CardQuestion = ({
   questionId,
   questionLength,
   questionWasAnswered,
   quizQuestion,
-  progressQuestion,
+  progressNextQuestion,
 }) => {
-  const { category, question, correct_answer } = quizQuestion;
+  const {
+    category,
+    question,
+    correct_answer,
+    incorrect_answers,
+  } = quizQuestion;
 
   function checkCorrectAnswer(e) {
     const userAnswer = e.target.value;
-    if (userAnswer === correct_answer) {
+    if (
+      userAnswer === correct_answer &&
+      !incorrect_answers.includes(userAnswer)
+    ) {
       // check if the answer is not in incorrect_answers
       questionWasAnswered({
         question: [question],
@@ -41,7 +49,7 @@ const CardQuestion = ({
         correct_answer,
         isCorrectAnswer: true,
       });
-      progressQuestion();
+      progressNextQuestion();
     } else {
       questionWasAnswered({
         question: [question],
@@ -49,7 +57,7 @@ const CardQuestion = ({
         isCorrectAnswer: false,
         userAnswer,
       });
-      progressQuestion();
+      progressNextQuestion();
     }
   } // custom hook useReducer
 
@@ -58,8 +66,12 @@ const CardQuestion = ({
       <p css={questionCount}>
         Question: {questionId}/{questionLength}
       </p>
-      <h2 css={title}>{category}</h2>
-      <div css={questionContainer}>{question}</div>
+      <h2 aria-label="Question Category" css={title}>
+        {category}
+      </h2>
+      <div aria-label="Question to Answer" css={questionContainer}>
+        {question}
+      </div>
 
       <ButtonContainer checkCorrectAnswer={checkCorrectAnswer} />
     </ContentCard>
