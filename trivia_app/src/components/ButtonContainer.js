@@ -29,16 +29,13 @@ const boolButton = css`
 const ButtonContainer = ({ userAnswerInput }) => {
   return (
     <div css={buttonContainer}>
-      <button
-        css={boolButton}
-        onClick={(e) => userAnswerInput(e.target.value)}
-        value="True"
-      >
+      <button css={boolButton} onClick={(e) => userAnswerInput(e)} value="True">
         True
       </button>
+
       <button
         css={boolButton}
-        onClick={(e) => userAnswerInput(e.target.value)}
+        onClick={(e) => userAnswerInput(e)}
         value="False"
       >
         False

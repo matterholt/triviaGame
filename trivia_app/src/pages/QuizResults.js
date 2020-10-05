@@ -60,7 +60,6 @@ export default function QuizResults() {
           <p>
             YOU SCORED {totalCorrect} / {userAnswers.length}
           </p>
-
           <ul css={resultsListContainer}>
             {userAnswers.map((userSubmittal) => {
               return <ResultRundown userSubmittal={userSubmittal} />;

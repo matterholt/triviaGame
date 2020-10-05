@@ -62,7 +62,7 @@ export default function Quiz() {
           questionId={questionIndexToAnswer + 1}
           questionWasAnswered={questionWasAnswered}
           quizQuestion={currentQuestion}
-          progressNextQuestion={progressNextQuestion}
+          progressQuestion={progressNextQuestion}
         />
       </Layout>
     );

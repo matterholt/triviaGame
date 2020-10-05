@@ -23,22 +23,37 @@ const questionCount = css`
   padding: 0;
   font-weight: 500;
 `;
-// think will break this up and add all to the quiz component??
 
 const CardQuestion = ({
   questionId,
   questionLength,
   questionWasAnswered,
   quizQuestion,
-  progressNextQuestion,
+  progressQuestion,
 }) => {
-  const { category, question } = quizQuestion;
+  const { category, question, correct_answer } = quizQuestion;
 
-  const {
-    setUserInput,
-    currentQuestionData,
-    evaluatedUserAnswer,
-  } = useCheckCorrectAnswer();
+  function checkCorrectAnswer(e) {
+    const userAnswer = e.target.value;
+    if (userAnswer === correct_answer) {
+      // check if the answer is not in incorrect_answers
+      questionWasAnswered({
+        question: [question],
+        userAnswer,
+        correct_answer,
+        isCorrectAnswer: true,
+      });
+      progressQuestion();
+    } else {
+      questionWasAnswered({
+        question: [question],
+        correct_answer,
+        isCorrectAnswer: false,
+        userAnswer,
+      });
+      progressQuestion();
+    }
+  } // custom hook useReducer
 
   return (
     <ContentCard key={questionId}>
@@ -51,7 +66,8 @@ const CardQuestion = ({
       <div aria-label="Question to Answer" css={questionContainer}>
         {question}
       </div>
-      <ButtonContainer userAnswerInput={setUserInput} />
+
+      <ButtonContainer userAnswerInput={checkCorrectAnswer} />
     </ContentCard>
   );
 };
