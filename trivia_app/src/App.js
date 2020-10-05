@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
 
 import Routes from "./routes";
@@ -12,9 +12,10 @@ import { QuestionProvider } from "./context/questionContext";
 
 // if user goes back how to handle the history, or should
 function App() {
-  const [currentUrl, setCurrentURL] = useState(
-    "https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean"
-  );
+  const [currentUrl, setCurrentURL] = useState();
+  useEffect(() => {
+    setCurrentURL(process.env.REACT_APP_STANDARD_QUESTIONS);
+  }, [setCurrentURL]);
   return (
     <QuestionProvider>
       <Routes>

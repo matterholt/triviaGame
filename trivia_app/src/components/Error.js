@@ -9,7 +9,7 @@ const Loading = () => {
     <Layout>
       <ContentCard>
         <h1>Look Like We have an Error</h1>
-        <LinkButton />
+        <LinkButton link={{ name: "Error.. try again", location: "/" }} />;
       </ContentCard>
     </Layout>
   );

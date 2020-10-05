@@ -53,7 +53,7 @@ export default function Quiz({ url }) {
     return <Loading />;
   }
   if (error) {
-    return <Error link={{ name: "Try Again", location: "/" }} />;
+    return <Error />;
   }
   if (didCompleteQuestions) {
     return <Redirect to="/QuizResults" />;
