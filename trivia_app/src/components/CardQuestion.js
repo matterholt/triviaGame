@@ -27,7 +27,6 @@ const questionCount = css`
 const CardQuestion = ({
   questionId,
   questionLength,
-  questionWasAnswered,
   quizQuestion,
   progressQuestion,
 }) => {
@@ -39,7 +38,7 @@ const CardQuestion = ({
     const userAnswer = e.target.value;
     evaluateInput(userAnswer);
     progressQuestion();
-  } // custom hook useReducer
+  }
 
   useEffect(() => {
     currentQuestionData(quizQuestion);
@@ -50,10 +49,10 @@ const CardQuestion = ({
       <p css={questionCount}>
         Question: {questionId}/{questionLength}
       </p>
-      <h2 aria-label="Question Category" css={title}>
+      <h2 aria-label="Category" css={title}>
         {category}
       </h2>
-      <div aria-label="Question to Answer" css={questionContainer}>
+      <div aria-label="Question" css={questionContainer}>
         {question}
       </div>
 

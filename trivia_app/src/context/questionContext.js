@@ -19,7 +19,10 @@ function QuestionProvider({ children }) {
 }
 
 function useTriviaQuestions() {
-  // keep the provider in the context folder allowing central location
+  // Possibly remove trivia question context, only being called in three spot first on
+  // would be on the quiz page, where it most import and only
+  // the other is on results page and is to just remove.
+
   const context = React.useContext(TriviaQuestionsContext);
   if (context === undefined) {
     throw new Error("useTriviaQuestions must be used within a CountProvider");

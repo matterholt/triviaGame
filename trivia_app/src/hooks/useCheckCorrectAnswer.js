@@ -20,6 +20,7 @@ function useCheckCorrectAnswer() {
   }
 
   function evaluateInput(answer) {
+    // code is not clean and there is duplication
     setUserInput(answer);
     if (answer === correctAnswer && !incorrectAnswer.includes(answer)) {
       setDidAnswerCorrect(true);
@@ -40,12 +41,11 @@ function useCheckCorrectAnswer() {
         didAnswerCorrect: false,
       };
       setEvaluatedUserAnswer(askedQuestion);
-
       addUserAnswers([...userAnswers, askedQuestion]);
     }
   }
 
-  return { currentQuestionData, evaluateInput };
+  return { currentQuestionData, evaluateInput, evaluatedUserAnswer };
 }
 
 export { useCheckCorrectAnswer };

@@ -37,8 +37,9 @@ export default function QuizResults() {
   }
 
   useEffect(() => {
+    console.log(userAnswers);
     const correctAnswered = userAnswers.filter(
-      (userInput) => userInput.isCorrectAnswer === true
+      (userInput) => userInput.didAnswerCorrect === true
     );
     setTotalCorrect(correctAnswered.length);
   }, [userAnswers, totalCorrect]);
