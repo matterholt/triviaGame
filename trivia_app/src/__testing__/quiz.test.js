@@ -13,11 +13,8 @@ import {
   waitForElementToBeRemoved,
 } from "@testing-library/react";
 
-import { userEvent } from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import { QuestionProvider } from "../context/questionContext";
-import { useAnsweredQuestions } from "../context/questionContext";
-
-import Routes from "../routes";
 import Quiz from "../pages/Quiz";
 
 const server = setupServer(

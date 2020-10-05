@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { userEvent } from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 
 import { createMemoryHistory } from "history"; // why need this?
 
@@ -8,14 +8,13 @@ import { Router } from "react-router-dom";
 
 import App from "../App";
 
-test("setup", () => {
+test("home page load", () => {
   const history = createMemoryHistory();
   render(
     <Router history={history}>
       <App />
     </Router>
   );
-  screen.debug();
   expect(
     screen.getByText(/Welcome to the Trivia Challenge/i)
   ).toBeInTheDocument();
