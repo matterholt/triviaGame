@@ -1,6 +1,7 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { useState } from "react";
+import { Route } from "react-router-dom";
 
+import Routes from "./routes";
 import Home from "./pages/Home";
 import Quiz from "./pages/Quiz";
 import QuizResults from "./pages/QuizResults";
@@ -11,22 +12,23 @@ import { QuestionProvider } from "./context/questionContext";
 
 // if user goes back how to handle the history, or should
 function App() {
+  const [currentUrl, setCurrentURL] = useState(
+    "https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean"
+  );
   return (
     <QuestionProvider>
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/Quiz">
-            <Quiz />
-          </Route>
-          <Route exact path="/QuizResults">
-            <QuizResults />
-          </Route>
-          <Route path="/" render={() => <div>404</div>} /> /
-        </Switch>
-      </Router>
+      <Routes>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/Quiz">
+          <Quiz url={currentUrl} />
+        </Route>
+        <Route exact path="/QuizResults">
+          <QuizResults />
+        </Route>
+        <Route path="/" render={() => <div>404</div>} /> /
+      </Routes>
     </QuestionProvider>
   );
 }

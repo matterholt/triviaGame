@@ -46,14 +46,15 @@ const CardQuestion = ({
 
   return (
     <ContentCard key={questionId}>
-      <p css={questionCount}>
-        Question: {questionId}/{questionLength}
-      </p>
-      <h2 aria-label="Category" css={title}>
-        {category}
-      </h2>
-      <div aria-label="Question" css={questionContainer}>
-        {question}
+      <div css={questionCount}>
+        <p>
+          Question: {questionId}/{questionLength}
+        </p>
+      </div>
+
+      <h2 css={title}>{category}</h2>
+      <div css={questionContainer}>
+        <p>{question}</p>
       </div>
 
       <ButtonContainer userAnswerInput={checkCorrectAnswer} />

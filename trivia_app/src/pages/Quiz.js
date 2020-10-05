@@ -14,7 +14,7 @@ import {
 import { useFetchQuestionsAPI } from "../services/questionService";
 import { useProgressQuestion } from "../hooks/useProgressQuestion";
 
-export default function Quiz() {
+export default function Quiz({ url }) {
   const { triviaQuestions } = useTriviaQuestions();
   const [{ error, loading }, setURL] = useFetchQuestionsAPI();
   const { userAnswers, addUserAnswers } = useAnsweredQuestions();
@@ -27,10 +27,8 @@ export default function Quiz() {
   const [didCompleteQuestions, setDidCompleteQuestions] = useState(false);
 
   useEffect(() => {
-    setURL(
-      "https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean"
-    );
-  }, [setURL]);
+    setURL(url);
+  }, [setURL, url]);
 
   function questionWasAnswered(userAnswered) {
     // added user results to the completed question answered

@@ -9,29 +9,34 @@ import { setupServer } from "msw/node";
 import {
   render,
   screen,
+  fireEvent,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
+
+import { userEvent } from "@testing-library/user-event";
 import { QuestionProvider } from "../context/questionContext";
+import { useAnsweredQuestions } from "../context/questionContext";
 
+import Routes from "../routes";
 import Quiz from "../pages/Quiz";
-
-const example = {
-  response_code: 0,
-  results: [
-    {
-      category: "Entertainment: Video Games",
-      type: "boolean",
-      difficulty: "hard",
-      question: "Unturned originally started as a Roblox game.",
-      correct_answer: "True",
-      incorrect_answers: ["False"],
-    },
-  ],
-};
 
 const server = setupServer(
   rest.get("/questions", (req, res, ctx) => {
-    return res(ctx.json({ quizQuestion: example }));
+    return res(
+      ctx.json({
+        response_code: 0,
+        results: [
+          {
+            category: "Entertainment: Video Games",
+            type: "boolean",
+            difficulty: "hard",
+            question: "Unturned originally started as a Roblox game.",
+            correct_answer: "True",
+            incorrect_answers: ["False"],
+          },
+        ],
+      })
+    );
   })
 );
 beforeAll(() => server.listen());
@@ -39,16 +44,22 @@ afterAll(() => server.close());
 
 // make a mock server
 
-test("Question Consumer default", async () => {
+test("Test the Question Page", async () => {
   render(
     <QuestionProvider>
-      <Quiz />
+      <Quiz url="/questions" />
     </QuestionProvider>
   );
 
   expect(screen.getByText(/loading/i)).toBeInTheDocument();
   await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
-  expect(screen.getByText(/question/i)).toBeInTheDocument();
-  expect(screen.getByRole("heading")).toBeInTheDocument();
-  screen.debug();
+
+  expect(screen.getByText(/question/i)).toHaveTextContent("Question: 1/1");
+
+  expect(screen.getByRole("heading")).toHaveTextContent(
+    "Entertainment: Video Games"
+  );
+
+  expect(screen.getByRole("button", { name: /true/i })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: /false/i })).toBeInTheDocument();
 });
