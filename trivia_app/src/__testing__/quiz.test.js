@@ -3,7 +3,11 @@
 // onclick on false, go to the next question and should have a register of false
 
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import {
+  render,
+  screen,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
 import { QuestionProvider } from "../context/questionContext";
 
 import {
@@ -13,11 +17,18 @@ import {
 
 import Quiz from "../pages/Quiz";
 
-test("Question Consumer default", () => {
+// make a mock server
+
+test("Question Consumer default", async () => {
   render(
     <QuestionProvider>
       <Quiz />
     </QuestionProvider>
   );
+
+  expect(screen.getByText(/loading/i)).toBeInTheDocument();
+  await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
+
+  expect(screen.getByText(/Question/i)).toBeInTheDocument();
   screen.debug();
 });

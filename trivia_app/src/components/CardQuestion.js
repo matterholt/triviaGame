@@ -1,7 +1,10 @@
+import { useEffect } from "react";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import ButtonContainer from "./ButtonContainer";
 import ContentCard from "./ContentCard";
+
+import { useCheckCorrectAnswer } from "../hooks/useCheckCorrectAnswer";
 
 const title = css`
   background-color: var(--main-background);
@@ -29,37 +32,13 @@ const CardQuestion = ({
   quizQuestion,
   progressNextQuestion,
 }) => {
-  const {
-    category,
-    question,
-    correct_answer,
-    incorrect_answers,
-  } = quizQuestion;
+  const { category, question } = quizQuestion;
 
-  function checkCorrectAnswer(e) {
-    const userAnswer = e.target.value;
-    if (
-      userAnswer === correct_answer &&
-      !incorrect_answers.includes(userAnswer)
-    ) {
-      // check if the answer is not in incorrect_answers
-      questionWasAnswered({
-        question: [question],
-        userAnswer,
-        correct_answer,
-        isCorrectAnswer: true,
-      });
-      progressNextQuestion();
-    } else {
-      questionWasAnswered({
-        question: [question],
-        correct_answer,
-        isCorrectAnswer: false,
-        userAnswer,
-      });
-      progressNextQuestion();
-    }
-  } // custom hook useReducer
+  const {
+    setUserInput,
+    currentQuestionData,
+    evaluatedUserAnswer,
+  } = useCheckCorrectAnswer();
 
   return (
     <ContentCard key={questionId}>
@@ -72,8 +51,7 @@ const CardQuestion = ({
       <div aria-label="Question to Answer" css={questionContainer}>
         {question}
       </div>
-
-      <ButtonContainer checkCorrectAnswer={checkCorrectAnswer} />
+      <ButtonContainer userAnswerInput={setUserInput} />
     </ContentCard>
   );
 };
