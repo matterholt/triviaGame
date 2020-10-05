@@ -3,7 +3,7 @@ import { useTriviaQuestions } from "../context/questionContext";
 
 const useFetchQuestionsAPI = () => {
   const [url, setURL] = useState(
-    "https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean"
+    "https://opentdb.com/api.php?amount=1&difficulty=hard&type=boolean"
   );
   const { setTriviaQuestions } = useTriviaQuestions();
   const [error, setError] = useState();

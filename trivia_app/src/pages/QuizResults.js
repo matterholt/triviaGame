@@ -12,7 +12,6 @@ import {
 import Layout from "../components/Layout";
 import HomeButton from "../components/HomeButton";
 import ContentCard from "../components/ContentCard";
-
 import ResultRundown from "../components/ResultRundown";
 
 const resultsListContainer = css`
@@ -37,7 +36,6 @@ export default function QuizResults() {
   }
 
   useEffect(() => {
-    console.log(userAnswers);
     const correctAnswered = userAnswers.filter(
       (userInput) => userInput.didAnswerCorrect === true
     );
