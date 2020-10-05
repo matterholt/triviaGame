@@ -31,29 +31,19 @@ const CardQuestion = ({
   quizQuestion,
   progressQuestion,
 }) => {
-  const { category, question, correct_answer } = quizQuestion;
+  const { category, question } = quizQuestion;
+
+  const { currentQuestionData, evaluateInput } = useCheckCorrectAnswer();
 
   function checkCorrectAnswer(e) {
     const userAnswer = e.target.value;
-    if (userAnswer === correct_answer) {
-      // check if the answer is not in incorrect_answers
-      questionWasAnswered({
-        question: [question],
-        userAnswer,
-        correct_answer,
-        isCorrectAnswer: true,
-      });
-      progressQuestion();
-    } else {
-      questionWasAnswered({
-        question: [question],
-        correct_answer,
-        isCorrectAnswer: false,
-        userAnswer,
-      });
-      progressQuestion();
-    }
+    evaluateInput(userAnswer);
+    progressQuestion();
   } // custom hook useReducer
+
+  useEffect(() => {
+    currentQuestionData(quizQuestion);
+  }, [currentQuestionData, quizQuestion]);
 
   return (
     <ContentCard key={questionId}>

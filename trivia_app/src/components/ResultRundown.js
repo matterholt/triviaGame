@@ -12,18 +12,18 @@ const listItem = css`
 `;
 const ResultRundown = ({ userSubmittal }) => {
   const {
-    question,
-    isCorrectAnswer,
+    currentAskedQuestion,
+    didAnswerCorrect,
     userAnswer,
-    correct_answer,
+    correctAnswer,
   } = userSubmittal;
   return (
     <li css={listItem}>
       <p style={{ margin: "0" }}>
         <span style={{ marginRight: "5px" }}>
-          {isCorrectAnswer ? emoji("✅") : emoji("❌")}
+          {didAnswerCorrect ? emoji("✅") : emoji("❌")}
         </span>
-        {question}
+        {currentAskedQuestion}
       </p>
 
       <p
@@ -36,14 +36,14 @@ const ResultRundown = ({ userSubmittal }) => {
         <span
           style={{
             fontWeight: "900",
-            color: `${isCorrectAnswer ? "rgb(119, 178, 85)" : "#dd2e44"}`,
+            color: `${didAnswerCorrect ? "rgb(119, 178, 85)" : "#dd2e44"}`,
           }}
         >
           {userAnswer}
         </span>
       </p>
-      {isCorrectAnswer ? null : (
-        <ShowCorrectValue correct_answer={correct_answer} />
+      {didAnswerCorrect ? null : (
+        <ShowCorrectValue correct_answer={correctAnswer} />
       )}
     </li>
   );

@@ -61,8 +61,8 @@ export default function QuizResults() {
             YOU SCORED {totalCorrect} / {userAnswers.length}
           </p>
           <ul css={resultsListContainer}>
-            {userAnswers.map((userSubmittal) => {
-              return <ResultRundown userSubmittal={userSubmittal} />;
+            {userAnswers.map((userSubmittal, id) => {
+              return <ResultRundown key={id} userSubmittal={userSubmittal} />;
             })}
           </ul>
           <HomeButton pathAction={resetQuestions} pathName="Play Again?" />

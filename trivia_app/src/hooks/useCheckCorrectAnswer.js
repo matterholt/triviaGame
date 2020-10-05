@@ -1,5 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+
+import { useAnsweredQuestions } from "../context/questionContext";
+
 function useCheckCorrectAnswer() {
+  const { userAnswers, addUserAnswers } = useAnsweredQuestions();
   const [currentAskedQuestion, setCurrentAskedQuestions] = useState();
   const [correctAnswer, SetCorrectAnswer] = useState();
   const [incorrectAnswer, setIncorrectAnswer] = useState([]);
@@ -8,27 +12,6 @@ function useCheckCorrectAnswer() {
   const [didAnswerCorrect, setDidAnswerCorrect] = useState();
   const [userAnswer, setUserInput] = useState();
 
-  useEffect(() => {
-    if (userAnswer === correctAnswer && !incorrectAnswer.includes(userAnswer)) {
-      setDidAnswerCorrect(true);
-    } else {
-      setDidAnswerCorrect(false);
-    }
-  }, [userAnswer, correctAnswer, setDidAnswerCorrect, incorrectAnswer]);
-
-  useEffect(() => {
-    // return the current evaluation
-    // should just update the global state of the answer
-    const askedQuestion = {
-      currentAskedQuestion,
-      userAnswer,
-      correctAnswer,
-      didAnswerCorrect,
-    };
-
-    setEvaluatedUserAnswer(askedQuestion);
-  }, [currentAskedQuestion, userAnswer, correctAnswer, didAnswerCorrect]);
-
   function currentQuestionData(AskedQuestion) {
     const { question, correct_answer, incorrect_answers } = AskedQuestion;
     setCurrentAskedQuestions(question);
@@ -36,7 +19,33 @@ function useCheckCorrectAnswer() {
     setIncorrectAnswer(incorrect_answers);
   }
 
-  return { setUserInput, currentQuestionData, evaluatedUserAnswer };
+  function evaluateInput(answer) {
+    setUserInput(answer);
+    if (answer === correctAnswer && !incorrectAnswer.includes(answer)) {
+      setDidAnswerCorrect(true);
+      const askedQuestion = {
+        currentAskedQuestion,
+        userAnswer: answer,
+        correctAnswer,
+        didAnswerCorrect: true,
+      };
+      setEvaluatedUserAnswer(askedQuestion);
+      addUserAnswers([...userAnswers, askedQuestion]);
+    } else {
+      setDidAnswerCorrect(false);
+      const askedQuestion = {
+        currentAskedQuestion,
+        userAnswer: answer,
+        correctAnswer,
+        didAnswerCorrect: false,
+      };
+      setEvaluatedUserAnswer(askedQuestion);
+
+      addUserAnswers([...userAnswers, askedQuestion]);
+    }
+  }
+
+  return { currentQuestionData, evaluateInput };
 }
 
 export { useCheckCorrectAnswer };
