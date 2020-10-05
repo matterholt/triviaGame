@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+let baseValue = null;
 
 const TriviaQuestionsContext = React.createContext();
-const UserAnswersContext = React.createContext();
+const UserAnswersContext = React.createContext(baseValue);
 
 function QuestionProvider({ children }) {
   const [triviaQuestions, setTriviaQuestions] = useState([]); // update with fetch
@@ -11,7 +12,9 @@ function QuestionProvider({ children }) {
     <TriviaQuestionsContext.Provider
       value={{ triviaQuestions, setTriviaQuestions }}
     >
-      <UserAnswersContext.Provider value={{ userAnswers, addUserAnswers }}>
+      <UserAnswersContext.Provider
+        value={(baseValue, { userAnswers, addUserAnswers })}
+      >
         {children}
       </UserAnswersContext.Provider>
     </TriviaQuestionsContext.Provider>

@@ -9,11 +9,10 @@ import { setupServer } from "msw/node";
 import {
   render,
   screen,
-  fireEvent,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
 
-import userEvent from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event"; //
 import { QuestionProvider } from "../context/questionContext";
 import Quiz from "../pages/Quiz";
 
@@ -39,9 +38,7 @@ const server = setupServer(
 beforeAll(() => server.listen());
 afterAll(() => server.close());
 
-// make a mock server
-
-test("Test the Question Page", async () => {
+test("Loading of data", async () => {
   render(
     <QuestionProvider>
       <Quiz url="/questions" />
@@ -49,8 +46,15 @@ test("Test the Question Page", async () => {
   );
 
   expect(screen.getByText(/loading/i)).toBeInTheDocument();
-  await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
+});
 
+test("questions for user", async () => {
+  render(
+    <QuestionProvider>
+      <Quiz url="/questions" />
+    </QuestionProvider>
+  );
+  await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
   expect(screen.getByText(/question/i)).toHaveTextContent("Question: 1/1");
 
   expect(screen.getByRole("heading")).toHaveTextContent(
@@ -59,4 +63,6 @@ test("Test the Question Page", async () => {
 
   expect(screen.getByRole("button", { name: /true/i })).toBeInTheDocument();
   expect(screen.getByRole("button", { name: /false/i })).toBeInTheDocument();
+
+  // once click redirect to next page
 });
